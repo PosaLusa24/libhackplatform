@@ -1,6 +1,6 @@
 #include <hackplatform/cpu.hpp>
 
-void HackPlatform::Cpu::process(const std::string &instruction, int16_t &reg_ram) {
+void HackPlatform::Cpu::execute(const std::string& instruction, int16_t& reg_ram) {
     m_reg_ram = reg_ram;
 
     // a-instruction
@@ -56,7 +56,7 @@ int16_t HackPlatform::Cpu::get_pc() {
     return m_pc;
 }
 
-int16_t HackPlatform::Cpu::eval_expr(const std::string &expr) {
+int16_t HackPlatform::Cpu::eval_expr(const std::string& expr) {
     if(expr.size() == 1) {
         if(expr[0] == 'A') return m_reg_a;
         if(expr[0] == 'D') return m_reg_d;
@@ -87,7 +87,7 @@ int16_t HackPlatform::Cpu::eval_expr(const std::string &expr) {
     return 0;
 }
 
-std::string HackPlatform::Cpu::extract_dest(const std::string &ins) {
+std::string HackPlatform::Cpu::extract_dest(const std::string& ins) {
     std::string result {};
     for(char c: ins) {
         if(c == '=') return result;
@@ -96,7 +96,7 @@ std::string HackPlatform::Cpu::extract_dest(const std::string &ins) {
     return "";
 }
 
-std::string HackPlatform::Cpu::extract_comp(const std::string &ins) {
+std::string HackPlatform::Cpu::extract_comp(const std::string& ins) {
     std::string result {};
     for(char c: ins) {
         if(c == ';') break;
@@ -106,7 +106,7 @@ std::string HackPlatform::Cpu::extract_comp(const std::string &ins) {
     return result;
 }
 
-std::string HackPlatform::Cpu::extract_jump(const std::string &ins) {
+std::string HackPlatform::Cpu::extract_jump(const std::string& ins) {
     std::string result {};
     bool found;
     for(char c: ins) {

@@ -3,7 +3,9 @@
 
 #include <hackplatform/rom.hpp>
 
-HackPlatform::Rom::Rom(const std::string &program) {
+HackPlatform::Rom::Rom() {}
+
+HackPlatform::Rom::Rom(const std::string& program) {
 
     // initialize symbol table
     std::map<std::string, int> syms {
@@ -35,7 +37,7 @@ HackPlatform::Rom::Rom(const std::string &program) {
 
     // resolve symbols in rom
     int counter {16};
-    for(auto &ins: m_memory) {
+    for(auto& ins: m_memory) {
         if(ins[0] != '@') continue;
         std::string sym {ins.substr(1)};
         if(isdigit(sym[0])) continue;
@@ -48,11 +50,21 @@ HackPlatform::Rom::Rom(const std::string &program) {
     }
 }
 
-size_t HackPlatform::Rom::size() {
+size_t HackPlatform::Rom::size() const {
     return m_memory.size();
 }
 
-const std::string& HackPlatform::Rom::operator[](size_t address) {
+HackPlatform::Rom& HackPlatform::Rom::operator=(const Rom& rom) {
+    m_memory = rom.m_memory;
+    return *this;
+}
+
+HackPlatform::Rom& HackPlatform::Rom::operator=(Rom&& rom) {
+    swap(m_memory, rom.m_memory);
+    return *this;
+}
+
+const std::string& HackPlatform::Rom::operator[](size_t address) const {
     return m_memory[address];
 }
 

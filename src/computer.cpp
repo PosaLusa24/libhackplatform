@@ -1,18 +1,28 @@
 #include <hackplatform/computer.hpp>
 
-void HackPlatform::Computer::load_rom(const HackPlatform::Rom &rom) {
+void HackPlatform::Computer::reset() {
+    m_ram.reset();
     m_cpu.reset();
+}
+
+void HackPlatform::Computer::load_rom(const HackPlatform::Rom& rom) {
+    this->reset();
     m_rom = rom;
 }
 
-void HackPlatform::Computer::run_for_cycles(int cycles) {
+void HackPlatform::Computer::load_rom(HackPlatform::Rom&& rom) {
+    this->reset();
+    m_rom = std::move(rom);
+}
+
+void HackPlatform::Computer::run(int cycles) {
     while(cycles--) {
         if(m_cpu.get_pc() >= m_rom.size()) return;
-        m_cpu.process(m_rom[m_cpu.get_pc()], m_ram[m_cpu.get_reg_a()]);
+        m_cpu.execute(m_rom[m_cpu.get_pc()], m_ram[m_cpu.get_reg_a()]);
     }
 }
 
-HackPlatform::Ram HackPlatform::Computer::dump_ram() {
-    return m_ram;
+int16_t& HackPlatform::Computer::ram(size_t address) {
+    return m_ram[address];
 }
 
