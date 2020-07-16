@@ -1,7 +1,7 @@
 #include <string>
 #include <hackplatform/computer.hpp>
 #include <hackplatform/rom.hpp>
-#include "../extern/catch2/catch.hpp"
+#include <catch2/catch.hpp>
 
 namespace Hack = HackPlatform;
 

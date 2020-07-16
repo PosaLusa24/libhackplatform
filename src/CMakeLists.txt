@@ -9,4 +9,4 @@ target_include_directories(cpu PUBLIC ../include)
 
 add_library(computer computer.cpp)
 target_include_directories(computer PUBLIC ../include)
-
+target_link_libraries(computer PRIVATE cpu ram rom)

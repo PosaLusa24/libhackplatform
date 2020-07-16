@@ -1,5 +1,5 @@
 #include <hackplatform/cpu.hpp>
-#include "../extern/catch2/catch.hpp"
+#include <catch2/catch.hpp>
 
 HackPlatform::Cpu cpu;
 int16_t reg_ram;
