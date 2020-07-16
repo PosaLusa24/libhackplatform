@@ -9,9 +9,9 @@ add_library(testlib test.cpp)
 target_link_libraries(testlib PUBLIC Catch2::Catch2)
 
 add_executable(cpu_test cpu.test.cpp)
-target_link_libraries(cpu_test PRIVATE testlib cpu)
+target_link_libraries(cpu_test PRIVATE testlib HackPlatform::Cpu)
 catch_discover_tests(cpu_test)
 
 add_executable(computer_test computer.test.cpp)
-target_link_libraries(computer_test PRIVATE testlib computer)
+target_link_libraries(computer_test PRIVATE testlib HackPlatform::Computer)
 catch_discover_tests(computer_test)
