@@ -8,6 +8,10 @@ FetchContent_MakeAvailable(catch2)
 add_library(testlib test.cpp)
 target_link_libraries(testlib PUBLIC Catch2::Catch2)
 
+add_executable(misc misc.cpp)
+target_link_libraries(misc PUBLIC testlib)
+catch_discover_tests(misc)
+
 add_executable(cpu_test cpu.test.cpp)
 target_link_libraries(cpu_test PRIVATE testlib HackPlatform::Cpu)
 catch_discover_tests(cpu_test)
