@@ -14,3 +14,8 @@ add_library(computer computer.cpp)
 target_include_directories(computer PUBLIC ../include)
 target_link_libraries(computer PRIVATE cpu ram rom)
 add_library(HackPlatform::Computer ALIAS computer)
+
+add_library(cpuemulator cpuemulator.cpp)
+target_include_directories(cpuemulator PUBLIC ../include)
+target_link_libraries(cpuemulator PRIVATE cpu)
+add_library(HackPlatform::cpuemulator ALIAS cpuemulator)

@@ -19,3 +19,7 @@ catch_discover_tests(cpu_test)
 add_executable(computer_test computer.test.cpp)
 target_link_libraries(computer_test PRIVATE testlib HackPlatform::Computer)
 catch_discover_tests(computer_test)
+
+add_executable(cpuemulator_test cpuemulator.test.cpp)
+target_link_libraries(cpuemulator_test PRIVATE testlib HackPlatform::cpuemulator)
+catch_discover_tests(cpuemulator_test)
